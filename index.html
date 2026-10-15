@@ -37,12 +37,18 @@
                     </a>
                 </li>
                 <li>
-                    <a href="">
+                    <button class="menu-button" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="site-menu">
                         <img src="/images/menu_35dp_E3E3E3_FILL0_wght400_GRAD0_opsz40.svg" alt="">
-                    </a>
+                    </button>
                 </li>
             </ul>
 
+            <div class="menu-panel" id="site-menu" role="navigation" aria-label="Site menu" hidden>
+                <a href="#restaurants">Restaurants</a>
+                <a href="#nearest-restaurants">Nearest restaurants</a>
+                <a href="#specialities">Specialities</a>
+                <a href="#instagram">Instagram</a>
+            </div>
 
         </div>
 
@@ -81,7 +87,7 @@
     </div>
 </section>
 
-<section> 
+<section id="restaurants">
     <div class="card-food ">
 <div class="box-card container">
 <div class="card-delivery">
@@ -154,7 +160,7 @@
     </div>
 </section>
 
-<section class="geo-input">
+<section class="geo-input" id="nearest-restaurants">
     <div class=" container">
         <div class="address">
             <div class="left1">
@@ -179,7 +185,7 @@
     </div>
 </section>
 
-<section>
+<section id="specialities">
     <div class="container">
         <div class="showall-btn">
             <h1>Specialities</h1>
@@ -257,7 +263,7 @@
 
 </section>
 
-<section>
+<section id="instagram">
     <div class="container">
     <div class="instagram">
 <h1>#YellowKitchens <span>in instagram</span></h1>
@@ -328,6 +334,42 @@
     </div>
 </footer>
 
+<script>
+    const menuButton = document.querySelector(".menu-button");
+    const menuPanel = document.querySelector("#site-menu");
+
+    function closeMenu() {
+        menuButton.setAttribute("aria-expanded", "false");
+        menuButton.setAttribute("aria-label", "Open menu");
+        menuPanel.hidden = true;
+    }
+
+    menuButton.addEventListener("click", () => {
+        const isOpen = menuButton.getAttribute("aria-expanded") === "true";
+        menuButton.setAttribute("aria-expanded", String(!isOpen));
+        menuButton.setAttribute("aria-label", isOpen ? "Open menu" : "Close menu");
+        menuPanel.hidden = isOpen;
+    });
+
+    menuPanel.addEventListener("click", (event) => {
+        if (event.target.closest("a")) {
+            closeMenu();
+        }
+    });
+
+    document.addEventListener("click", (event) => {
+        if (!menuButton.contains(event.target) && !menuPanel.contains(event.target)) {
+            closeMenu();
+        }
+    });
+
+    document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape" && !menuPanel.hidden) {
+            closeMenu();
+            menuButton.focus();
+        }
+    });
+</script>
 
 </body>
 </html>

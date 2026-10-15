@@ -2,12 +2,60 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: relative;
 }
 
 .nav-list {
   display: flex;
   list-style: none;
   gap: 48px;
+}
+
+.menu-button {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  padding: 4px;
+  border: 0;
+  border-radius: 4px;
+  background: #F2F4FA;
+  cursor: pointer;
+}
+.menu-button img {
+  width: 32px;
+  height: 32px;
+  filter: brightness(0) saturate(100%) invert(20%) sepia(12%) saturate(1067%) hue-rotate(201deg) brightness(92%) contrast(88%);
+}
+.menu-button:focus-visible {
+  outline: 2px solid #B79C10;
+  outline-offset: 2px;
+}
+
+.menu-panel {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 16px;
+  z-index: 10;
+  display: grid;
+  min-width: 200px;
+  padding: 8px;
+  border-radius: 6px;
+  background: #ffffff;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1411764706);
+}
+.menu-panel[hidden] {
+  display: none;
+}
+.menu-panel a {
+  padding: 12px;
+  border-radius: 4px;
+  color: #333346;
+  font-family: Martel Sans, sans-serif;
+  text-decoration: none;
+}
+.menu-panel a:hover, .menu-panel a:focus-visible {
+  background: #F2F4FA;
 }
 
 * {
@@ -17,9 +65,15 @@
 }
 
 .container {
-  max-width: 1256px;
+  width: 100%;
+  max-width: 1288px;
   margin: 0 auto;
-  padding: 0 auto;
+  padding: 0 16px;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
 }
 
 .card-container {
@@ -101,8 +155,8 @@ nav {
 
 .card-food {
   box-shadow: 0px 8px 40px 0px rgba(0, 0, 0, 0.0784313725);
-  width: 872px;
-  height: 104px;
+  width: min(872px, 100%);
+  min-height: 104px;
   opacity: 1;
 }
 
@@ -127,8 +181,15 @@ nav {
   box-shadow: 0px 8px 40px 0px rgba(0, 0, 0, 0.0784313725);
 }
 
+.card-olice > img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
 .burger-olice {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 24px;
   margin-bottom: 72px;
 }
@@ -270,7 +331,8 @@ input {
 }
 
 .burger-fish {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(8, minmax(0, 1fr));
   gap: 24px;
   align-items: center;
   margin-bottom: 72px;
@@ -288,7 +350,7 @@ input {
 }
 
 .fish-card {
-  width: 136px;
+  width: 100%;
   height: 136px;
   top: 96px;
   left: 160px;
@@ -398,8 +460,9 @@ input {
   background-image: url("/images/Map.png");
   background-repeat: no-repeat;
   background-size: cover;
-  width: 1280px;
-  height: 600px;
+  width: 100%;
+  aspect-ratio: 1280/600;
+  min-height: 240px;
   opacity: 1;
   margin-top: 72px;
   margin-bottom: 72px;
@@ -537,4 +600,196 @@ input {
   display: flex;
   gap: 32px;
   font-size: 28px;
+}
+
+@media (max-width: 1024px) {
+  .address {
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+  .left1 {
+    flex: 1 1 320px;
+  }
+  .right1 {
+    flex: 1 1 428px;
+    min-width: 0;
+  }
+  .burger-fish {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+  .footer {
+    padding-right: 24px;
+    padding-left: 24px;
+  }
+  .footer-container {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    row-gap: 40px;
+  }
+  .footer-bottom {
+    position: static;
+    grid-column: 1/-1;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 24px;
+  }
+  .socials {
+    position: static;
+    margin-top: 32px;
+  }
+}
+@media (max-width: 900px) {
+  .nav-list {
+    gap: 20px;
+  }
+  .food {
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+  }
+  .left {
+    margin-top: 40px;
+    width: 100%;
+  }
+  .left h1 {
+    font-size: clamp(36px, 8vw, 58px);
+  }
+  .right {
+    width: 100%;
+    margin-top: 0;
+    text-align: center;
+  }
+  .right img {
+    display: block;
+    margin: 0 auto;
+  }
+  .card-container {
+    padding: 20px 0;
+  }
+  .card {
+    width: min(180px, (100vw - 64px) / 2);
+  }
+  .box-card {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+    padding: 16px;
+  }
+  .card-delivery {
+    min-width: 0;
+    gap: 8px;
+  }
+  .burger-olice {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .address {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+  }
+  .left1 {
+    margin-top: 40px;
+    margin-bottom: 24px;
+  }
+  .left1 h1 {
+    font-size: clamp(28px, 6vw, 36px);
+    line-height: 1.3;
+  }
+  .right1 {
+    flex: 1 1 auto;
+    margin-bottom: 40px;
+  }
+  .input-box {
+    width: auto;
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+  .burger-fish {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 16px;
+  }
+  .limons-cards {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+    padding-top: 40px;
+    padding-bottom: 40px;
+  }
+  .limons-card {
+    margin-top: 0;
+  }
+  .instagramm {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+  }
+  .instagramm img {
+    width: 100%;
+  }
+}
+@media (max-width: 480px) {
+  .container {
+    padding-right: 12px;
+    padding-left: 12px;
+  }
+  .nav-list {
+    gap: 12px;
+  }
+  .nav-list img {
+    width: 28px;
+    height: 28px;
+  }
+  .card {
+    padding: 12px;
+  }
+  .card__title {
+    font-size: 18px;
+  }
+  .instagram h1 {
+    font-size: clamp(24px, 7vw, 36px);
+    line-height: 1.3;
+  }
+  .card-food {
+    min-height: 0;
+  }
+  .box-card {
+    grid-template-columns: 1fr;
+  }
+  .card-delivery {
+    align-items: center;
+  }
+  .burger-fish {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .right1 {
+    flex-wrap: wrap;
+  }
+  .input-box {
+    flex-basis: 100%;
+  }
+  .send-btn {
+    width: 100%;
+  }
+  .footer-container {
+    grid-template-columns: 1fr;
+  }
+  .footer-bottom {
+    grid-column: auto;
+  }
+}
+@media (max-width: 600px) {
+  .box-card {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    padding: 12px;
+  }
+  .card-delivery {
+    gap: 8px;
+  }
+  .card-delivery p {
+    font-size: 14px;
+    line-height: 20px;
+  }
+  .footer-container {
+    grid-template-columns: 1fr;
+  }
 }/*# sourceMappingURL=style.css.map */
